@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射文件的namespace和mapper接口的全类名一致-->
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <!-- int insertUser2(User user);; -->
+    <insert id="insertUser2" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into users values(null, #{userName}, #{password}, #{age})
+    </insert>
+
+    <!-- int deleteById2(@Param("id") Integer id); -->
+    <delete id="deleteById2">
+        delete from users
+        where id = #{id}
+    </delete>
+
+    <!--int updateById2(@Param("userName") String userName, @Param("id") Integer id) -->
+    <update id = "updateById2">
+        update user
+        set user_name = #{userName}
+        where id = #{id}
+    </update>
+
+
+
+    <resultMap id="getAllUsersMap2" type="com.itheima.dao.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="age" column="age"/>
+    </resultMap>
+
+    <!-- List<User> getAllUsers2() -->
+    <select id="getAllUsers2" resultMap="getAllUsersMap2">
+        select *
+        from users
+    </select>
+
+
+    <resultMap id="getUserByIdMap2" type="com.itheima.dao.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="age" column="age"/>
+    </resultMap>
+    <!-- User getUserById2(@Param("id") Integer id); -->
+    <select id="getUserById2" resultMap="getUserByIdMap2">
+        select *
+        from users
+        where id = #{id}
+    </select>
+</mapper>
